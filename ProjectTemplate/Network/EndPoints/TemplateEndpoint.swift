@@ -9,7 +9,7 @@ import Foundation
 
 enum TemplateEndpoint: KEndpointProtocol {
     
-    case wsCollectionGlosary
+    case wsListCharacters
     
     var scheme: String {
         return "https"
@@ -20,13 +20,13 @@ enum TemplateEndpoint: KEndpointProtocol {
     }
     
     var urlBase: String {
-        return URL_BASE_KNETWORK
+        return Constants.Service.urlBase
     }
     
     var path: String {
         switch self {
-        case .wsCollectionGlosary:
-            return "/api/index.json"
+        case .wsListCharacters:
+            return "/api/character"
         }
     }
     
@@ -40,7 +40,7 @@ enum TemplateEndpoint: KEndpointProtocol {
     
     var method: KURLMethod {
         switch self {
-        case .wsCollectionGlosary:
+        case .wsListCharacters:
             return .GET
         }
     }

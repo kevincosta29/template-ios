@@ -5,6 +5,10 @@
 //  Created by Kevin Costa on 2/5/22.
 //
 
+struct WSListCharacters: Decodable {
+    var results: [Character]?
+}
+
 // MARK: - Base error response
 
 struct WSErrorResponse: Codable {

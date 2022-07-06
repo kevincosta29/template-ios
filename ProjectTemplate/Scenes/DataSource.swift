@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DataSource {
+final class DataSource {
     
     private let session: URLSession
     
@@ -15,11 +15,15 @@ class DataSource {
         self.session = session
     }
     
-    func fetchContent() async -> (Result<[IndDocument], KNetworkError>) {
-        let response = await KService.executeRequest(endpoint: TemplateEndpoint.wsCollectionGlosary, model: [IndDocument].self, session: session)
+    func fetchContent() async -> (Result<[Character], KNetworkError>) {
+        let response = await KService.executeRequest(endpoint: TemplateEndpoint.wsListCharacters, model: WSListCharacters.self, session: session)
         switch response {
         case .success(let result):
-            return .success(result)
+            if let array = result.results {
+                return .success(array)
+            } else {
+                return .failure(KNetworkError.error(message: "error.noCharactersFound".localized()))
+            }
         case .failure(let error):
             return .failure(error)
         }

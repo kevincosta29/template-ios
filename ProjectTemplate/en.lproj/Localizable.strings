@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  ProjectTemplate
+
+  Created by Kevin Costa on 1/7/22.
+  
+*/
+
+character.list.loading = "Loading Characters";
+error.noCharactersFound = "No characters found";
+
+character.row.status = "Status: %@";
+character.row.gender = "Gender: %@";
+character.row.created = "Created: %@";
+

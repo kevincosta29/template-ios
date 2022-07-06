@@ -9,23 +9,28 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @StateObject var viewModel: ViewModel
+    @StateObject private var viewModel = ViewModel()
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(viewModel.arrayDocuments) { document in
-                    VStack(alignment: .leading) {
-                        Text(document.title ?? "")
-                        Spacer()
-                        Text(document.bite ?? "")
-                            .font(.caption)
-                            .fontWeight(.light)
+            Group {
+                switch viewModel.status {
+                case .loading:
+                    LoadingView(text: "character.list.loading".localized())
+                case .success:
+                    List {
+                        ForEach(viewModel.arrayCharacters) { character in
+                            CharacterRow(character: character)
+                        }
+                    }
+                case .error(let strMsg):
+                    ErrorView(strMsg: strMsg) {
+                        viewModel.fetchDocuments()
                     }
                 }
-            }
-            .navigationTitle("Document")
-        }.onAppear {
+            }.navigationTitle("Rick & Morty")
+        }
+        .onAppear {
             viewModel.fetchDocuments()
         }
     }
@@ -33,6 +38,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(viewModel: ViewModel())
+        ContentView()
     }
 }

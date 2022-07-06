@@ -7,7 +7,7 @@
 
 import Foundation
 
-class KNetwork {
+final class KNetwork {
     
     public static func executeRequest(endpoint: KEndpointProtocol, session: URLSession) async -> Result<(data: Data, statusCode: Int), KNetworkError> {
         

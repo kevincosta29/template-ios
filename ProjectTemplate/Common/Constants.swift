@@ -7,4 +7,10 @@
 
 import Foundation
 
-let URL_BASE_KNETWORK: String = "healthcare.gov"
+struct Constants {
+    
+    struct Service {
+        static let urlBase = "rickandmortyapi.com"
+    }
+    
+}
